@@ -1,0 +1,11 @@
+listen_port = 9899
+vpncmd      = "/usr/local/bin/vpncmd"
+server      = "localhost:8888"
+
+[[hubs]]
+name = "HUB1"
+password = "password"
+
+[[hubs]]
+name = "HUB2"
+password = "password"

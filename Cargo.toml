@@ -1,0 +1,13 @@
+[package]
+name = "softether-exporter"
+version = "0.1.0"
+authors = ["hatta"]
+
+[dependencies]
+prometheus   = "0.2"
+lazy_static  = "0.2.1"
+hyper        = { version = "0.9", default-features = false }
+csv          = "1.0.0-beta.5"
+toml         = "0.4"
+serde        = "1.0"
+serde_derive = "1.0"
