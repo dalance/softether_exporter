@@ -10,7 +10,7 @@ env:
 
 before_script:
 - if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then rustup target add x86_64-unknown-linux-musl; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then rustup target add x86_64-pc-windows-msvc; fi
+- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then rustup target add x86_64-pc-windows-gnu; fi
 - if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "i686"   ]]; then rustup target add i686-unknown-linux-musl; fi
 - if [[ $TRAVIS_OS_NAME == "osx"   && $ARCH == "i686"   ]]; then rustup target add i686-apple-darwin; fi
 - which cargo
