@@ -7,25 +7,14 @@ os:
 before_script:
 - if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add x86_64-unknown-linux-musl; fi
 - if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add x86_64-pc-windows-gnu; fi
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add i686-unknown-linux-musl; fi
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add i686-pc-windows-gnu; fi
 - if [[ $TRAVIS_OS_NAME == "linux" ]]; then sudo apt-get -qq update; fi
 - if [[ $TRAVIS_OS_NAME == "linux" ]]; then sudo apt-get -qq install binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64; fi
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then sudo apt-get -qq install binutils-mingw-w64-i686 g++-mingw-w64-i686; fi
-- if [[ $TRAVIS_OS_NAME == "osx"   ]]; then rustup target add i686-apple-darwin; fi
-- which cargo
-- which rustc
-- cargo --version
-- rustc --version
 
 script:
 - make test
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_lnx32; fi
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_lnx64; fi
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_win32; fi
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_win64; fi
-- if [[ $TRAVIS_OS_NAME == "osx"   ]]; then make release_osx32; fi
-- if [[ $TRAVIS_OS_NAME == "osx"   ]]; then make release_osx64; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_lnx; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_win; fi
+- if [[ $TRAVIS_OS_NAME == "osx"   ]]; then make release_osx; fi
 
 #deploy:
 #  provider: releases
