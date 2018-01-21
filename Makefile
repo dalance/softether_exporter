@@ -20,8 +20,8 @@ release_lnx32:
 	zip -j softether-exporter-v${VERSION}-i686-lnx.zip target/i686-unknown-linux-musl/release/softether-exporter
 
 release_lnx64:
-	cargo build --release --target=x86_64-unknown-linux-musl
-	cargo build --release --target=x86_64-pc-windows-gnu
+#	cargo build --release --target=x86_64-unknown-linux-musl
+	cargo build --release --target=x86_64-pc-windows-gnu -- -C linker=x86_64-w64-mingw32-gcc
 	zip -j softether-exporter-v${VERSION}-x86_64-lnx.zip target/x86_64-unknown-linux-musl/release/softether-exporter
 
 release_osx32:
