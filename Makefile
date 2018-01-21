@@ -25,11 +25,11 @@ release_lnx64:
 
 release_win32:
 	cargo build --release --target=i686-pc-windows-gnu
-	zip -j softether-exporter-v${VERSION}-i686-win.zip target/i686-pc-windows-gnu/release/softether-exporter
+	zip -j softether-exporter-v${VERSION}-i686-win.zip target/i686-pc-windows-gnu/release/softether-exporter.exe
 
 release_win64:
 	cargo build --release --target=x86_64-pc-windows-gnu
-	zip -j softether-exporter-v${VERSION}-x86_64-win.zip target/x86_64-pc-windows-gnu/release/softether-exporter
+	zip -j softether-exporter-v${VERSION}-x86_64-win.zip target/x86_64-pc-windows-gnu/release/softether-exporter.exe
 
 release_osx32:
 	cargo build --release --target=i686-apple-darwin
