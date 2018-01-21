@@ -17,12 +17,12 @@ clean:
 
 release_lnx:
 	cargo build --release --target=x86_64-unknown-linux-musl
-	zip -j softether-exporter-v${VERSION}-x86_64-lnx.zip target/x86_64-unknown-linux-musl/release/softether-exporter
+	zip -j softether_exporter-v${VERSION}-x86_64-lnx.zip target/x86_64-unknown-linux-musl/release/softether_exporter
 
 release_win:
 	cargo build --release --target=x86_64-pc-windows-gnu
-	zip -j softether-exporter-v${VERSION}-x86_64-win.zip target/x86_64-pc-windows-gnu/release/softether-exporter.exe
+	zip -j softether_exporter-v${VERSION}-x86_64-win.zip target/x86_64-pc-windows-gnu/release/softether_exporter.exe
 
 release_osx:
 	cargo build --release --target=x86_64-apple-darwin
-	zip -j softether-exporter-v${VERSION}-x86_64-osx.zip target/x86_64-apple-darwin/release/softether-exporter
+	zip -j softether_exporter-v${VERSION}-x86_64-osx.zip target/x86_64-apple-darwin/release/softether_exporter

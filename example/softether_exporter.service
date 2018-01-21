@@ -3,7 +3,7 @@ Description=Prometheus SoftEther Exporter
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/softether-exporter /etc/prometheus/softether.toml
+ExecStart=/usr/local/bin/softether_exporter /etc/prometheus/softether.toml
 User=nobody
 
 [Install]

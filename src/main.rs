@@ -18,7 +18,7 @@ use exporter::{Config, Exporter};
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
-        println!( "Usage: softether-exporter [config_file]" );
+        println!( "Usage: softether_exporter [config_file]" );
         return
     }
 
