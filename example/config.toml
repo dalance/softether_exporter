@@ -1,11 +1,11 @@
-listen_port = 9899
-vpncmd      = "/usr/local/bin/vpncmd"
-server      = "localhost:8888"
+listen_port = 9999                    # listen_port of expoter
+vpncmd      = "/usr/local/bin/vpncmd" # path to vpncmd binary
+server      = "localhost:8888"        # address:port of SoftEther VPN server
 
 [[hubs]]
-name = "HUB1"
-password = "password"
+name     = "HUB1" ## HUB name
+password = "xxx"  ## HUB password
 
 [[hubs]]
-name = "HUB2"
-password = "password"
+name     = "HUB2"
+password = "yyy"
