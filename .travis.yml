@@ -12,7 +12,7 @@ before_script:
 - if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then rustup target add x86_64-unknown-linux-musl; fi
 - if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then rustup target add x86_64-pc-windows-gnu; fi
 - if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then sudo apt-get -qq update; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then sudo apt-get -qq install binutils-mingw-w64-x86_64 g++-mingw-w64-x86_64; fi
+- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then sudo apt-get -qq install binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64; fi
 - if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "i686"   ]]; then rustup target add i686-unknown-linux-musl; fi
 - if [[ $TRAVIS_OS_NAME == "osx"   && $ARCH == "i686"   ]]; then rustup target add i686-apple-darwin; fi
 - which cargo
