@@ -60,7 +60,6 @@ The format of `config_file` is below.
 
 ```
 listen_port = 9411                    # listen_port of expoter ( 9411 is the default port of softether_exporter )
-listen_port = 9999                    # listen_port of expoter
 vpncmd      = "/usr/local/bin/vpncmd" # path to vpncmd binary
 server      = "localhost:8888"        # address:port of SoftEther VPN server
 
