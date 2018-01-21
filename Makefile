@@ -16,15 +16,19 @@ clean:
 	cargo clean
 
 release_lnx32:
-#	cargo build --release --target=i686-unknown-linux-musl
-	cargo build --release --target=i686-pc-windows-gnu
-#	zip -j softether-exporter-v${VERSION}-i686-lnx.zip target/i686-unknown-linux-musl/release/softether-exporter
-	zip -j softether-exporter-v${VERSION}-i686-win.zip target/i686-pc-windows-gnu/release/softether-exporter
+	echo cargo build --release --target=i686-unknown-linux-musl
+	echo zip -j softether-exporter-v${VERSION}-i686-lnx.zip target/i686-unknown-linux-musl/release/softether-exporter
 
 release_lnx64:
-#	cargo build --release --target=x86_64-unknown-linux-musl
+	echo cargo build --release --target=x86_64-unknown-linux-musl
+	echo zip -j softether-exporter-v${VERSION}-x86_64-lnx.zip target/x86_64-unknown-linux-musl/release/softether-exporter
+
+release_win32:
+	cargo build --release --target=i686-pc-windows-gnu
+	zip -j softether-exporter-v${VERSION}-i686-win.zip target/i686-pc-windows-gnu/release/softether-exporter
+
+release_win64:
 	cargo build --release --target=x86_64-pc-windows-gnu
-#	zip -j softether-exporter-v${VERSION}-x86_64-lnx.zip target/x86_64-unknown-linux-musl/release/softether-exporter
 	zip -j softether-exporter-v${VERSION}-x86_64-win.zip target/x86_64-pc-windows-gnu/release/softether-exporter
 
 release_osx32:

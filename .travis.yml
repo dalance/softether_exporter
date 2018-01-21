@@ -4,32 +4,28 @@ os:
 - linux
 - osx
 
-env:
-- ARCH=i686
-- ARCH=x86_64
-
 before_script:
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then rustup target add x86_64-unknown-linux-musl; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then rustup target add x86_64-pc-windows-gnu; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then sudo apt-get -qq update; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then sudo apt-get -qq install binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "i686"   ]]; then rustup target add i686-unknown-linux-musl; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "i686"   ]]; then rustup target add i686-pc-windows-gnu; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "i686"   ]]; then sudo apt-get -qq update; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "i686"   ]]; then sudo apt-get -qq install binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64; fi
-- if [[ $TRAVIS_OS_NAME == "osx"   && $ARCH == "i686"   ]]; then rustup target add i686-apple-darwin; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add x86_64-unknown-linux-musl; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add x86_64-pc-windows-gnu; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add i686-unknown-linux-musl; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then rustup target add i686-pc-windows-gnu; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then sudo apt-get -qq update; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then sudo apt-get -qq install binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then sudo apt-get -qq install binutils-mingw-w64-i686 g++-mingw-w64-i686; fi
+- if [[ $TRAVIS_OS_NAME == "osx"   ]]; then rustup target add i686-apple-darwin; fi
 - which cargo
 - which rustc
 - cargo --version
 - rustc --version
 
 script:
-- if [[ $TRAVIS_OS_NAME == "osx"   && $ARCH == "x86_64" ]]; then make test; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then make test; fi
-- if [[ $TRAVIS_OS_NAME == "osx"   && $ARCH == "i686"   ]]; then make release_osx32; fi
-- if [[ $TRAVIS_OS_NAME == "osx"   && $ARCH == "x86_64" ]]; then make release_osx64; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "i686"   ]]; then make release_lnx32; fi
-- if [[ $TRAVIS_OS_NAME == "linux" && $ARCH == "x86_64" ]]; then make release_lnx64; fi
+- make test
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_lnx32; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_lnx64; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_win32; fi
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then make release_win64; fi
+- if [[ $TRAVIS_OS_NAME == "osx"   ]]; then make release_osx32; fi
+- if [[ $TRAVIS_OS_NAME == "osx"   ]]; then make release_osx64; fi
 
 #deploy:
 #  provider: releases
