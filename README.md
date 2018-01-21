@@ -5,10 +5,33 @@ Prometheus exporter of SoftEther VPN server
 
 ## Description
 
-softether_exporter is prometheus exporter for SoftEther VPN server.
+softether_exporter is a prometheus exporter for SoftEther VPN server.
 The provided metrics are below.
 
 ```
+softether_online
+softether_sessions
+softether_sessions_client
+softether_sessions_bridge
+softether_users
+softether_groups
+softether_mac_tables
+softether_ip_tables
+softether_logins
+softether_outgoing_unicast_packets
+softether_outgoing_unicast_bytes
+softether_outgoing_broadcast_packets
+softether_outgoing_broadcast_bytes
+softether_incoming_unicast_packets
+softether_incoming_unicast_bytes
+softether_incoming_broadcast_packets
+softether_incoming_broadcast_bytes
+```
+
+Each metrics has `hub` label. For example, outgoing unicast packet rate of HUB1 is below.
+
+```
+rate(softether_outgoing_unicast_packets{hub="HUB1"}[1m])
 ```
 
 ## Install

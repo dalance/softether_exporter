@@ -143,7 +143,7 @@ pub struct Exporter {
 impl Exporter {
     pub fn start ( config: Config ) -> Result<(), Box<Error>> {
         let encoder = TextEncoder::new();
-        let addr    = format!( "0.0.0.0:{}", config.listen_port.unwrap_or( 9999 ) );
+        let addr    = format!( "0.0.0.0:{}", config.listen_port.unwrap_or( 9411 ) );
         let vpncmd  = config.vpncmd.unwrap_or( String::from( "vpncmd" ) );
         let server  = config.server.unwrap_or( String::from( "localhost" ) );
         let hubs    = config.hubs;
