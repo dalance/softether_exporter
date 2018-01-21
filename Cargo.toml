@@ -6,6 +6,7 @@ repository = "https://github.com/dalance/softether_exporter"
 license = "MIT"
 readme = "README.md"
 description = "Prometheus expoter for SoftEther VPN server"
+categories = ["web-programming"]
 
 [badges]
 travis-ci = { repository = "dalance/softether_exporter" }
