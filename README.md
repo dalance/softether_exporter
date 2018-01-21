@@ -2,6 +2,7 @@
 Prometheus exporter of SoftEther VPN server
 
 [![Build Status](https://travis-ci.org/dalance/softether_exporter.svg?branch=master)](https://travis-ci.org/dalance/softether_exporter)
+[![Crates.io](https://img.shields.io/crates/v/softether_exporter.svg)](https://crates.io/crates/softether_exporter)
 
 ## Description
 
