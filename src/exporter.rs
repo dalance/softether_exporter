@@ -12,103 +12,103 @@ use softether_reader::SoftEtherReader;
 lazy_static! {
     static ref ONLINE: GaugeVec = register_gauge_vec!(
         "softether_online",
-        "test",
+        "Hub online.",
         &["hub"]
     ).unwrap();
 
     static ref SESSIONS: GaugeVec = register_gauge_vec!(
-        "softether_sessions",
-        "test",
+        "softether_sessions_total",
+        "Total number of sessions.",
         &["hub"]
     ).unwrap();
 
     static ref SESSIONS_CLIENT: GaugeVec = register_gauge_vec!(
-        "softether_sessions_client",
-        "test",
+        "softether_sessions_client_total",
+        "Total number of client sessions.",
         &["hub"]
     ).unwrap();
 
     static ref SESSIONS_BRIDGE: GaugeVec = register_gauge_vec!(
-        "softether_sessions_bridge",
-        "test",
+        "softether_sessions_bridge_total",
+        "Total number of bridge sessions.",
         &["hub"]
     ).unwrap();
 
     static ref USERS: GaugeVec = register_gauge_vec!(
-        "softether_users",
-        "test",
+        "softether_users_total",
+        "Total number of users.",
         &["hub"]
     ).unwrap();
 
     static ref GROUPS: GaugeVec = register_gauge_vec!(
-        "softether_groups",
-        "test",
+        "softether_groups_total",
+        "Total number of groups.",
         &["hub"]
     ).unwrap();
 
     static ref MAC_TABLES: GaugeVec = register_gauge_vec!(
-        "softether_mac_tables",
-        "test",
+        "softether_mac_tables_total",
+        "Total number of entries in MAC table.",
         &["hub"]
     ).unwrap();
 
     static ref IP_TABLES: GaugeVec = register_gauge_vec!(
-        "softether_ip_tables",
-        "test",
+        "softether_ip_tables_total",
+        "Total number of entries in IP table.",
         &["hub"]
     ).unwrap();
 
     static ref LOGINS: GaugeVec = register_gauge_vec!(
-        "softether_logins",
-        "test",
+        "softether_logins_total",
+        "Total number of logins.",
         &["hub"]
     ).unwrap();
 
     static ref OUTGOING_UNICAST_PACKETS: GaugeVec = register_gauge_vec!(
         "softether_outgoing_unicast_packets",
-        "test",
+        "Outgoing unicast transfer in packets.",
         &["hub"]
     ).unwrap();
 
     static ref OUTGOING_UNICAST_BYTES: GaugeVec = register_gauge_vec!(
         "softether_outgoing_unicast_bytes",
-        "test",
+        "Outgoing unicast transfer in bytes.",
         &["hub"]
     ).unwrap();
 
     static ref OUTGOING_BROADCAST_PACKETS: GaugeVec = register_gauge_vec!(
         "softether_outgoing_broadcast_packets",
-        "test",
+        "Outgoing broadcast transfer in packets.",
         &["hub"]
     ).unwrap();
 
     static ref OUTGOING_BROADCAST_BYTES: GaugeVec = register_gauge_vec!(
         "softether_outgoing_broadcast_bytes",
-        "test",
+        "Outgoing broadcast transfer in bytes.",
         &["hub"]
     ).unwrap();
 
     static ref INCOMING_UNICAST_PACKETS: GaugeVec = register_gauge_vec!(
         "softether_incoming_unicast_packets",
-        "test",
+        "Incoming unicast transfer in packets.",
         &["hub"]
     ).unwrap();
 
     static ref INCOMING_UNICAST_BYTES: GaugeVec = register_gauge_vec!(
         "softether_incoming_unicast_bytes",
-        "test",
+        "Incoming unicast transfer in bytes.",
         &["hub"]
     ).unwrap();
 
     static ref INCOMING_BROADCAST_PACKETS: GaugeVec = register_gauge_vec!(
         "softether_incoming_broadcast_packets",
-        "test",
+        "Incoming broadcast transfer in packets.",
         &["hub"]
     ).unwrap();
 
     static ref INCOMING_BROADCAST_BYTES: GaugeVec = register_gauge_vec!(
         "softether_incoming_broadcast_bytes",
-        "test",
+        "Incoming broadcast transfer in bytes.",
         &["hub"]
     ).unwrap();
 }
