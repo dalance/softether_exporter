@@ -11,14 +11,14 @@ The provided metrics are below.
 
 ```
 softether_online
-softether_sessions
-softether_sessions_client
-softether_sessions_bridge
-softether_users
-softether_groups
-softether_mac_tables
-softether_ip_tables
-softether_logins
+softether_sessions_total
+softether_sessions_client_total
+softether_sessions_bridge_total
+softether_users_total
+softether_groups_total
+softether_mac_tables_total
+softether_ip_tables_total
+softether_logins_total
 softether_outgoing_unicast_packets
 softether_outgoing_unicast_bytes
 softether_outgoing_broadcast_packets
