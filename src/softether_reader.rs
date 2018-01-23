@@ -1,12 +1,31 @@
 use csv;
 use std::error::Error;
-use std::process::Command;
+use std::process::{Command, Stdio};
+use std::fmt;
+use std::io::Write;
+
+#[derive(Debug)]
+pub struct SoftEtherError {
+    msg: String,
+}
+
+impl fmt::Display for SoftEtherError {
+    fn fmt( &self, f: &mut fmt::Formatter ) -> fmt::Result {
+        write!( f, "{}", self.msg )
+    }
+}
+
+impl Error for SoftEtherError {
+    fn description( &self ) -> &str {
+        &self.msg
+    }
+}
 
 pub struct SoftEtherReader;
 
 impl SoftEtherReader {
     pub fn hub_status( vpncmd: &str, server: &str, hub: &str, password: &str ) -> Result<HubStatus, Box<Error>> {
-        let output = Command::new( vpncmd )
+        let mut child = Command::new( vpncmd )
             .arg( server )
             .arg( "/SERVER" )
             .arg( format!( "/HUB:{}", hub ) )
@@ -14,7 +33,22 @@ impl SoftEtherReader {
             .arg( "/CSV" )
             .arg( "/CMD" )
             .arg( "StatusGet" )
-            .output()?;
+            .stdin( Stdio::piped() )
+            .stdout( Stdio::piped() )
+            .spawn()?;
+
+        {
+            let stdin = child.stdin.as_mut().unwrap();
+            // Input Ctrl-D to interrupt password prompt
+            stdin.write_all( &[4] )?;
+        }
+
+        let output = child.wait_with_output()?;
+
+        if !output.status.success() {
+            let msg = String::from_utf8_lossy( output.stdout.as_slice() );
+            return Err( Box::new( SoftEtherError{ msg: String::from( format!( "vpncmd failed ( {} )", msg ) ) } ) )
+        }
 
         let mut rdr = csv::Reader::from_reader( output.stdout.as_slice() );
         let mut status = HubStatus::new();
