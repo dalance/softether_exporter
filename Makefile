@@ -1,9 +1,11 @@
 VERSION = $(patsubst "%",%, $(word 3, $(shell grep version Cargo.toml)))
 BUILD_TIME = $(shell date +"%Y/%m/%d %H:%M:%S")
 GIT_REVISION = $(shell git log -1 --format="%h")
+RUST_VERSION = $(word 2, $(shell rustc -V))
 
 export BUILD_TIME
 export GIT_REVISION
+export RUST_VERSION
 
 .PHONY: all test clean release_lnx release_win release_osx
 

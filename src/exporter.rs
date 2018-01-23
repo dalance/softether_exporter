@@ -118,6 +118,12 @@ lazy_static! {
         "Incoming broadcast transfer in bytes.",
         &["hub"]
     ).unwrap();
+
+    static ref BUILD_INFO: GaugeVec = register_gauge_vec!(
+        "softether_build_info",
+        "A metric with a constant '1' value labeled by version, revision and rustversion",
+        &["version", "revision", "rustversion"]
+    ).unwrap();
 }
 
 static LANDING_PAGE: &'static str = "<html>
@@ -127,6 +133,10 @@ static LANDING_PAGE: &'static str = "<html>
 <p><a href=\"/metrics\">Metrics</a></p>
 </body>
 ";
+
+static VERSION: &'static str = env!( "CARGO_PKG_VERSION" );
+static GIT_REVISION: Option<&'static str> = option_env!( "GIT_REVISION" );
+static RUST_VERSION: Option<&'static str> = option_env!( "RUST_VERSION" );
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
@@ -199,6 +209,10 @@ impl Exporter {
                         INCOMING_BROADCAST_PACKETS.with_label_values(&[&status.name]).set( status.incoming_broadcast_packets );
                         INCOMING_BROADCAST_BYTES  .with_label_values(&[&status.name]).set( status.incoming_broadcast_bytes );
                     }
+
+                    let git_revision = GIT_REVISION.unwrap_or( "" );
+                    let rust_version = RUST_VERSION.unwrap_or( "" );
+                    BUILD_INFO.with_label_values(&[&VERSION, &git_revision, &rust_version]).set( 1.0 );
 
                     let metric_familys = prometheus::gather();
                     let mut buffer = vec![];
