@@ -8,16 +8,16 @@
 
 | metric                               | description                            | labels                         |
 | ------------------------------------ | -------------------------------------- | ------------------------------ |
-| softether_up                         | The last query is valid                | hub                            |
+| softether_up                         | The last query is successful           | hub                            |
 | softether_online                     | Hub is online                          | hub                            |
-| softether_sessions_total             | Total number of sessions               | hub                            |
-| softether_sessions_client_total      | Total number of client sessions        | hub                            |
-| softether_sessions_bridge_total      | Total number of bridge sessions        | hub                            |
-| softether_users_total                | Total number of users                  | hub                            |
-| softether_groups_total               | Total number of groups                 | hub                            |
-| softether_mac_tables_total           | Total number of entries in MAC table   | hub                            |
-| softether_ip_tables_total            | Total number of entries in IP table    | hub                            |
-| softether_logins_total               | Total number of logins                 | hub                            |
+| softether_sessions                   | Number of sessions                     | hub                            |
+| softether_sessions_client            | Number of client sessions              | hub                            |
+| softether_sessions_bridge            | Number of bridge sessions              | hub                            |
+| softether_users                      | Number of users                        | hub                            |
+| softether_groups                     | Number of groups                       | hub                            |
+| softether_mac_tables                 | Number of entries in MAC table         | hub                            |
+| softether_ip_tables                  | Number of entries in IP table          | hub                            |
+| softether_logins                     | Number of logins                       | hub                            |
 | softether_outgoing_unicast_packets   | Outgoing unicast transfer in packets   | hub                            |
 | softether_outgoing_unicast_bytes     | Outgoing unicast transfer in bytes     | hub                            |
 | softether_outgoing_broadcast_packets | Outgoing broadcast transfer in packets | hub                            |
@@ -26,7 +26,7 @@
 | softether_incoming_unicast_bytes     | Incoming unicast transfer in bytes     | hub                            |
 | softether_incoming_broadcast_packets | Incoming broadcast transfer in packets | hub                            |
 | softether_incoming_broadcast_bytes   | Incoming broadcast transfer in bytes   | hub                            |
-| softether_build_info                 | Build information                      | version, revision, rustversion |
+| softether_build_info                 | softether_exporter Build information   | version, revision, rustversion |
 
 ## Query Example
 

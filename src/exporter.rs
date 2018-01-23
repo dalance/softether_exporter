@@ -24,50 +24,50 @@ lazy_static! {
     ).unwrap();
 
     static ref SESSIONS: GaugeVec = register_gauge_vec!(
-        "softether_sessions_total",
-        "Total number of sessions.",
+        "softether_sessions",
+        "Number of sessions.",
         &["hub"]
     ).unwrap();
 
     static ref SESSIONS_CLIENT: GaugeVec = register_gauge_vec!(
-        "softether_sessions_client_total",
-        "Total number of client sessions.",
+        "softether_sessions_client",
+        "Number of client sessions.",
         &["hub"]
     ).unwrap();
 
     static ref SESSIONS_BRIDGE: GaugeVec = register_gauge_vec!(
-        "softether_sessions_bridge_total",
-        "Total number of bridge sessions.",
+        "softether_sessions_bridge",
+        "Number of bridge sessions.",
         &["hub"]
     ).unwrap();
 
     static ref USERS: GaugeVec = register_gauge_vec!(
-        "softether_users_total",
-        "Total number of users.",
+        "softether_users",
+        "Number of users.",
         &["hub"]
     ).unwrap();
 
     static ref GROUPS: GaugeVec = register_gauge_vec!(
-        "softether_groups_total",
-        "Total number of groups.",
+        "softether_groups",
+        "Number of groups.",
         &["hub"]
     ).unwrap();
 
     static ref MAC_TABLES: GaugeVec = register_gauge_vec!(
-        "softether_mac_tables_total",
-        "Total number of entries in MAC table.",
+        "softether_mac_tables",
+        "Number of entries in MAC table.",
         &["hub"]
     ).unwrap();
 
     static ref IP_TABLES: GaugeVec = register_gauge_vec!(
-        "softether_ip_tables_total",
-        "Total number of entries in IP table.",
+        "softether_ip_tables",
+        "Number of entries in IP table.",
         &["hub"]
     ).unwrap();
 
     static ref LOGINS: GaugeVec = register_gauge_vec!(
-        "softether_logins_total",
-        "Total number of logins.",
+        "softether_logins",
+        "Number of logins.",
         &["hub"]
     ).unwrap();
 
