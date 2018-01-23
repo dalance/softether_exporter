@@ -15,10 +15,21 @@ mod softether_reader;
 use std::env;
 use exporter::{Config, Exporter};
 
+static VERSION: &'static str = env!( "CARGO_PKG_VERSION" );
+static BUILD_TIME  : Option<&'static str> = option_env!( "BUILD_TIME"   );
+static GIT_REVISION: Option<&'static str> = option_env!( "GIT_REVISION" );
+
 fn main() {
+    let version_info = if BUILD_TIME.is_some() {
+        format!( "  version   : {}\n  revision  : {}\n  build time: {}\n", VERSION, GIT_REVISION.unwrap_or( "" ), BUILD_TIME.unwrap() )
+    } else {
+        format!( "  version: {}\n", VERSION )
+    };
+
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
         println!( "Usage: softether_exporter [config_file]" );
+        println!( "\n{}", version_info );
         return
     }
 
