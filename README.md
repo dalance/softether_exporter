@@ -10,6 +10,7 @@ softether_exporter is a prometheus exporter for SoftEther VPN server.
 The provided metrics are below.
 
 ```
+softether_up
 softether_online
 softether_sessions_total
 softether_sessions_client_total
@@ -27,6 +28,7 @@ softether_incoming_unicast_packets
 softether_incoming_unicast_bytes
 softether_incoming_broadcast_packets
 softether_incoming_broadcast_bytes
+softether_build_info
 ```
 
 Each metrics has `hub` label. For example, outgoing unicast packet rate of HUB1 is below.
@@ -37,7 +39,13 @@ rate(softether_outgoing_unicast_packets{hub="HUB1"}[1m])
 
 ## Install
 Download from [release page](https://github.com/dalance/softether_exporter/releases/latest), and extract to any directory ( e.g. `/usr/local/bin` ).
-See the example files: `example/softether_exporter.service` and `example/config.toml`
+See the example files in `example` directory as below.
+
+| File                               | Description                    |
+| ---------------------------------- | ------------------------------ |
+| example/softether_exporter.service | systemd unit file              |
+| example/config.toml                | softether_exporter config file |
+
 
 If the release build doesn't fit your environment, you can build and install from source code.
 
