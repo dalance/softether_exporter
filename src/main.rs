@@ -40,7 +40,7 @@ fn main() {
 
     match Exporter::start( config ) {
         Ok ( _ ) => (),
-        Err( x ) => { println!( "Server error failed: {}", x ); return },
+        Err( x ) => { println!( "Server start failed: {}", x ); return },
     }
 }
 
