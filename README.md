@@ -1,5 +1,5 @@
 # softether_exporter
-Prometheus exporter of SoftEther VPN server
+[Prometheus](https://prometheus.io) exporter for [SoftEther VPN server](http://www.softether.org)
 
 [![Build Status](https://travis-ci.org/dalance/softether_exporter.svg?branch=master)](https://travis-ci.org/dalance/softether_exporter)
 [![Crates.io](https://img.shields.io/crates/v/softether_exporter.svg)](https://crates.io/crates/softether_exporter)
@@ -9,29 +9,29 @@ Prometheus exporter of SoftEther VPN server
 softether_exporter is a prometheus exporter for SoftEther VPN server.
 The provided metrics are below.
 
-```
-softether_up
-softether_online
-softether_sessions_total
-softether_sessions_client_total
-softether_sessions_bridge_total
-softether_users_total
-softether_groups_total
-softether_mac_tables_total
-softether_ip_tables_total
-softether_logins_total
-softether_outgoing_unicast_packets
-softether_outgoing_unicast_bytes
-softether_outgoing_broadcast_packets
-softether_outgoing_broadcast_bytes
-softether_incoming_unicast_packets
-softether_incoming_unicast_bytes
-softether_incoming_broadcast_packets
-softether_incoming_broadcast_bytes
-softether_build_info
-```
+| metric                               | description                            | labels                         |
+| ------------------------------------ | -------------------------------------- | ------------------------------ |
+| softether_up                         | The last query is valid                | hub                            |
+| softether_online                     | Hub is online                          | hub                            |
+| softether_sessions_total             | Total number of sessions               | hub                            |
+| softether_sessions_client_total      | Total number of client sessions        | hub                            |
+| softether_sessions_bridge_total      | Total number of bridge sessions        | hub                            |
+| softether_users_total                | Total number of users                  | hub                            |
+| softether_groups_total               | Total number of groups                 | hub                            |
+| softether_mac_tables_total           | Total number of entries in MAC table   | hub                            |
+| softether_ip_tables_total            | Total number of entries in IP table    | hub                            |
+| softether_logins_total               | Total number of logins                 | hub                            |
+| softether_outgoing_unicast_packets   | Outgoing unicast transfer in packets   | hub                            |
+| softether_outgoing_unicast_bytes     | Outgoing unicast transfer in bytes     | hub                            |
+| softether_outgoing_broadcast_packets | Outgoing broadcast transfer in packets | hub                            |
+| softether_outgoing_broadcast_bytes   | Outgoing broadcast transfer in bytes   | hub                            |
+| softether_incoming_unicast_packets   | Incoming unicast transfer in packets   | hub                            |
+| softether_incoming_unicast_bytes     | Incoming unicast transfer in bytes     | hub                            |
+| softether_incoming_broadcast_packets | Incoming broadcast transfer in packets | hub                            |
+| softether_incoming_broadcast_bytes   | Incoming broadcast transfer in bytes   | hub                            |
+| softether_build_info                 | Build information                      | version, revision, rustversion |
 
-Each metrics has `hub` label. For example, outgoing unicast packet rate of HUB1 is below.
+Each metric has `hub` label. For example, outgoing unicast packet rate of HUB1 is below.
 
 ```
 rate(softether_outgoing_unicast_packets{hub="HUB1"}[1m])
