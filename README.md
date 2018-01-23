@@ -4,10 +4,7 @@
 [![Build Status](https://travis-ci.org/dalance/softether_exporter.svg?branch=master)](https://travis-ci.org/dalance/softether_exporter)
 [![Crates.io](https://img.shields.io/crates/v/softether_exporter.svg)](https://crates.io/crates/softether_exporter)
 
-## Description
-
-softether_exporter is a prometheus exporter for SoftEther VPN server.
-The provided metrics are below.
+## Exported Metrics
 
 | metric                               | description                            | labels                         |
 | ------------------------------------ | -------------------------------------- | ------------------------------ |
@@ -31,7 +28,9 @@ The provided metrics are below.
 | softether_incoming_broadcast_bytes   | Incoming broadcast transfer in bytes   | hub                            |
 | softether_build_info                 | Build information                      | version, revision, rustversion |
 
-Each metric has `hub` label. For example, outgoing unicast packet rate of HUB1 is below.
+## Query Example
+
+Outgoing unicast packet rate of HUB1 is below.
 
 ```
 rate(softether_outgoing_unicast_packets{hub="HUB1"}[1m])
