@@ -2,8 +2,7 @@ use csv;
 use std::error::Error;
 use std::process::Command;
 
-pub struct SoftEtherReader {
-}
+pub struct SoftEtherReader;
 
 impl SoftEtherReader {
     pub fn hub_status( vpncmd: &str, server: &str, hub: &str, password: &str ) -> Result<HubStatus, Box<Error>> {
