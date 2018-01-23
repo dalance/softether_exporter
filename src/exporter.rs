@@ -11,6 +11,12 @@ use std::io::Read;
 use softether_reader::SoftEtherReader;
 
 lazy_static! {
+    static ref UP: GaugeVec = register_gauge_vec!(
+        "softether_up",
+        "The last query is successful.",
+        &["hub"]
+    ).unwrap();
+
     static ref ONLINE: GaugeVec = register_gauge_vec!(
         "softether_online",
         "Hub online.",
@@ -167,9 +173,14 @@ impl Exporter {
                         let password = hub.password.unwrap_or( String::from( "" ) );
                         let status   = match SoftEtherReader::hub_status( &vpncmd, &server, &name, &password ) {
                             Ok ( x ) => x,
-                            Err( x ) => { println!( "Hub status read failed: {}", x ); return },
+                            Err( x ) => {
+                                UP.with_label_values(&[&name]).set( 0.0 );
+                                println!( "Hub status read failed: {}", x );
+                                continue
+                            },
                         };
 
+                        UP                        .with_label_values(&[&status.name]).set( 1.0 );
                         ONLINE                    .with_label_values(&[&status.name]).set( if status.online { 1.0 } else { 0.0 } );
                         SESSIONS                  .with_label_values(&[&status.name]).set( status.sessions );
                         SESSIONS_CLIENT           .with_label_values(&[&status.name]).set( status.sessions_client );
