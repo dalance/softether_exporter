@@ -7,13 +7,14 @@ license = "MIT"
 readme = "README.md"
 description = "Prometheus expoter for SoftEther VPN server"
 categories = ["web-programming"]
+edition = "2018"
 
 [badges]
 travis-ci = { repository = "dalance/softether_exporter" }
 
 [dependencies]
-prometheus   = "0.3"
-lazy_static  = "0.2"
+prometheus   = "0.4.2"
+lazy_static  = "1.2.0"
 hyper        = { version = "0.9", default-features = false }
 csv          = "1.0.0-beta.5"
 toml         = "0.4"
