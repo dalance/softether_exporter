@@ -132,7 +132,7 @@ pub struct Hub {
 }
 
 impl Config {
-    pub fn from_file(file: &str) -> Result<Config, Box<Error>> {
+    pub fn from_file(file: &str) -> Result<Config, Box<dyn Error>> {
         let mut f = File::open(file)?;
         let mut s = String::new();
         let _ = f.read_to_string(&mut s);
@@ -144,7 +144,7 @@ impl Config {
 pub struct Exporter;
 
 impl Exporter {
-    pub fn start(config: Config) -> Result<(), Box<Error>> {
+    pub fn start(config: Config) -> Result<(), Box<dyn Error>> {
         let encoder = TextEncoder::new();
         let addr = format!("0.0.0.0:{}", config.listen_port.unwrap_or(9411));
         let vpncmd = config.vpncmd.unwrap_or(String::from("vpncmd"));
