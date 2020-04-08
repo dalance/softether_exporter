@@ -27,6 +27,8 @@
 | softether_incoming_broadcast_packets | Incoming broadcast transfer in packets | hub                            |
 | softether_incoming_broadcast_bytes   | Incoming broadcast transfer in bytes   | hub                            |
 | softether_build_info                 | softether_exporter Build information   | version, revision, rustversion |
+| softether_user_transfer_packets      | User transfer in packets               | hub, user                      |
+| softether_user_transfer_bytes        | User transfer in bytes                 | hub, user                      |
 
 ## Query Example
 

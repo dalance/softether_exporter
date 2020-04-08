@@ -5,8 +5,9 @@ use hyper::server::{Request, Response, Server};
 use hyper::uri::RequestUri;
 use lazy_static::lazy_static;
 use prometheus;
-use prometheus::{register_gauge_vec, Encoder, GaugeVec, TextEncoder, __register_gauge_vec, opts};
+use prometheus::{register_gauge_vec, Encoder, GaugeVec, TextEncoder};
 use serde_derive::Deserialize;
+use std::collections::HashMap;
 use std::error::Error;
 use std::fs::File;
 use std::io::Read;
@@ -103,6 +104,18 @@ lazy_static! {
         &["version", "revision", "rustversion"]
     )
     .unwrap();
+    static ref USER_TRANSFER_BYTES: GaugeVec = register_gauge_vec!(
+        "softether_user_transfer_bytes",
+        "User transfer in bytes.",
+        &["hub", "user"]
+    )
+    .unwrap();
+    static ref USER_TRANSFER_PACKETS: GaugeVec = register_gauge_vec!(
+        "softether_user_transfer_packets",
+        "User transfer in packets.",
+        &["hub", "user"]
+    )
+    .unwrap();
 }
 
 static LANDING_PAGE: &'static str = "<html>
@@ -168,6 +181,16 @@ impl Exporter {
                             }
                         };
 
+                    let sessions =
+                        match SoftEtherReader::hub_sessions(&vpncmd, &server, &name, &password) {
+                            Ok(x) => x,
+                            Err(x) => {
+                                UP.with_label_values(&[&name]).set(0.0);
+                                println!("Hub sessions read failed: {}", x);
+                                continue;
+                            }
+                        };
+
                     UP.with_label_values(&[&status.name]).set(1.0);
                     ONLINE
                         .with_label_values(&[&status.name])
@@ -214,6 +237,35 @@ impl Exporter {
                     INCOMING_BROADCAST_BYTES
                         .with_label_values(&[&status.name])
                         .set(status.incoming_broadcast_bytes);
+
+                    let mut transfer_bytes = HashMap::new();
+                    let mut transfer_packets = HashMap::new();
+                    for session in sessions {
+                        if let Some(val) = transfer_bytes.get(&session.user) {
+                            let val = val + session.transfer_bytes;
+                            transfer_bytes.insert(session.user.clone(), val);
+                        } else {
+                            let val = session.transfer_bytes;
+                            transfer_bytes.insert(session.user.clone(), val);
+                        }
+                        if let Some(val) = transfer_packets.get(&session.user) {
+                            let val = val + session.transfer_packets;
+                            transfer_packets.insert(session.user.clone(), val);
+                        } else {
+                            let val = session.transfer_packets;
+                            transfer_packets.insert(session.user.clone(), val);
+                        }
+                    }
+                    for (user, bytes) in &transfer_bytes {
+                        USER_TRANSFER_BYTES
+                            .with_label_values(&[&status.name, user])
+                            .set(*bytes);
+                    }
+                    for (user, packets) in &transfer_packets {
+                        USER_TRANSFER_PACKETS
+                            .with_label_values(&[&status.name, user])
+                            .set(*packets);
+                    }
                 }
 
                 let git_revision = GIT_REVISION.unwrap_or("");
