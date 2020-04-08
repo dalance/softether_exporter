@@ -40,6 +40,10 @@ Outgoing unicast packet rate of HUB1 is below.
 rate(softether_outgoing_unicast_packets{hub="HUB1"}[1m])
 ```
 
+## Grafana Dashboard
+
+[SoftEther VPN](https://grafana.com/grafana/dashboards/12053)
+
 ## Install
 Download from [release page](https://github.com/dalance/softether_exporter/releases/latest), and extract to any directory ( e.g. `/usr/local/bin` ).
 See the example files in `example` directory as below.
