@@ -1,7 +1,7 @@
 # softether_exporter
 [Prometheus](https://prometheus.io) exporter for [SoftEther VPN server](http://www.softether.org)
 
-[![Build Status](https://travis-ci.org/dalance/softether_exporter.svg?branch=master)](https://travis-ci.org/dalance/softether_exporter)
+[![Actions Status](https://github.com/dalance/softether_exporter/workflows/Regression/badge.svg)](https://github.com/dalance/softether_exporter/actions)
 [![Crates.io](https://img.shields.io/crates/v/softether_exporter.svg)](https://crates.io/crates/softether_exporter)
 
 ## Exported Metrics
