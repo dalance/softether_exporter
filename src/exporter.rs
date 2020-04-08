@@ -1,4 +1,5 @@
 use crate::softether_reader::SoftEtherReader;
+use anyhow::Error;
 use hyper::header::ContentType;
 use hyper::mime::{Mime, SubLevel, TopLevel};
 use hyper::server::{Request, Response, Server};
@@ -8,9 +9,9 @@ use prometheus;
 use prometheus::{register_gauge_vec, Encoder, GaugeVec, TextEncoder};
 use serde_derive::Deserialize;
 use std::collections::HashMap;
-use std::error::Error;
 use std::fs::File;
 use std::io::Read;
+use std::path::Path;
 use toml;
 
 lazy_static! {
@@ -132,7 +133,6 @@ static RUST_VERSION: Option<&'static str> = option_env!("RUST_VERSION");
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    listen_port: Option<u32>,
     vpncmd: Option<String>,
     server: Option<String>,
     hubs: Vec<Hub>,
@@ -145,7 +145,7 @@ pub struct Hub {
 }
 
 impl Config {
-    pub fn from_file(file: &str) -> Result<Config, Box<dyn Error>> {
+    pub fn from_file(file: &Path) -> Result<Config, Error> {
         let mut f = File::open(file)?;
         let mut s = String::new();
         let _ = f.read_to_string(&mut s);
@@ -157,12 +157,17 @@ impl Config {
 pub struct Exporter;
 
 impl Exporter {
-    pub fn start(config: Config) -> Result<(), Box<dyn Error>> {
+    pub fn start(config: Config, listen_address: &str, _verbose: bool) -> Result<(), Error> {
         let encoder = TextEncoder::new();
-        let addr = format!("0.0.0.0:{}", config.listen_port.unwrap_or(9411));
         let vpncmd = config.vpncmd.unwrap_or(String::from("vpncmd"));
         let server = config.server.unwrap_or(String::from("localhost"));
         let hubs = config.hubs;
+
+        let addr = if listen_address.starts_with(":") {
+            format!("0.0.0.0{}", listen_address)
+        } else {
+            String::from(listen_address)
+        };
 
         println!("Server started: {}", addr);
 

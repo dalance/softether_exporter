@@ -62,15 +62,28 @@ The binary can be got from [SoftEther VPN Download](http://www.softether-downloa
 ## Usage
 
 ```
-softether_exporter [config_file]
+softether_exporter 0.1.5
+
+USAGE:
+    softether_exporter [FLAGS] [OPTIONS] --config.file <config>
+
+FLAGS:
+    -v, --verbose    Show verbose message
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+        --web.listen-address <listen-address>
+            Address on which to expose metrics and web interface [default: :9411]
+
+        --config.file <config>                   Config file
 ```
 
-The format of `config_file` is below.
+The format of `<config>` is below.
 
 ```
-listen_port = 9411                    # listen_port of expoter ( 9411 is the default port of softether_exporter )
-vpncmd      = "/usr/local/bin/vpncmd" # path to vpncmd binary
-server      = "localhost:8888"        # address:port of SoftEther VPN server
+vpncmd = "/usr/local/bin/vpncmd" # path to vpncmd binary
+server = "localhost:8888"        # address:port of SoftEther VPN server
 
 [[hubs]]
 name     = "HUB1" # HUB name

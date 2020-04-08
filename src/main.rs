@@ -2,44 +2,48 @@ mod exporter;
 mod softether_reader;
 
 use crate::exporter::{Config, Exporter};
+use anyhow::Error;
 use std::env;
+use std::path::PathBuf;
+use structopt::{clap, StructOpt};
 
-static VERSION: &'static str = env!("CARGO_PKG_VERSION");
-static BUILD_TIME: Option<&'static str> = option_env!("BUILD_TIME");
-static GIT_REVISION: Option<&'static str> = option_env!("GIT_REVISION");
+// -------------------------------------------------------------------------------------------------
+// Opt
+// -------------------------------------------------------------------------------------------------
+
+#[derive(Debug, StructOpt)]
+#[structopt(long_version(option_env!("LONG_VERSION").unwrap_or(env!("CARGO_PKG_VERSION"))))]
+#[structopt(setting(clap::AppSettings::ColoredHelp))]
+#[structopt(setting(clap::AppSettings::DeriveDisplayOrder))]
+pub struct Opt {
+    /// Address on which to expose metrics and web interface.
+    #[structopt(long = "web.listen-address", default_value = ":9411")]
+    pub listen_address: String,
+
+    /// Config file.
+    #[structopt(long = "config.file")]
+    pub config: PathBuf,
+
+    /// Show verbose message
+    #[structopt(short = "v", long = "verbose")]
+    pub verbose: bool,
+}
+
+// -------------------------------------------------------------------------------------------------
+// Main
+// -------------------------------------------------------------------------------------------------
+
+fn run() -> Result<(), Error> {
+    let opt = Opt::from_args();
+
+    let config = Config::from_file(&opt.config)?;
+
+    Exporter::start(config, &opt.listen_address, opt.verbose)?;
+    Ok(())
+}
 
 fn main() {
-    let version_info = if BUILD_TIME.is_some() {
-        format!(
-            "  version   : {}\n  revision  : {}\n  build time: {}\n",
-            VERSION,
-            GIT_REVISION.unwrap_or(""),
-            BUILD_TIME.unwrap()
-        )
-    } else {
-        format!("  version: {}\n", VERSION)
-    };
-
-    let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
-        println!("Usage: softether_exporter [config_file]");
-        println!("\n{}", version_info);
-        return;
-    }
-
-    let config = match Config::from_file(&args[1]) {
-        Ok(x) => x,
-        Err(x) => {
-            println!("Config ( {} ) read failed: {}", &args[1], x);
-            return;
-        }
-    };
-
-    match Exporter::start(config) {
-        Ok(_) => (),
-        Err(x) => {
-            println!("Server start failed: {}", x);
-            return;
-        }
+    if let Err(x) = run() {
+        println!("{}", x);
     }
 }
