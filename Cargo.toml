@@ -8,6 +8,7 @@ readme = "README.md"
 description = "Prometheus expoter for SoftEther VPN server"
 categories = ["web-programming"]
 edition = "2018"
+exclude = ["grafana/*", "example/*"]
 
 [badges]
 travis-ci = { repository = "dalance/softether_exporter" }

@@ -4,6 +4,8 @@
 [![Actions Status](https://github.com/dalance/softether_exporter/workflows/Regression/badge.svg)](https://github.com/dalance/softether_exporter/actions)
 [![Crates.io](https://img.shields.io/crates/v/softether_exporter.svg)](https://crates.io/crates/softether_exporter)
 
+![screenshot](./grafana/screenshot.png)
+
 ## Exported Metrics
 
 | metric                               | description                            | labels                         |
