@@ -22,7 +22,7 @@ prometheus   = "0.8"
 serde        = "1"
 serde_derive = "1"
 structopt    = "0.3"
-toml         = "0.4"
+toml         = "0.5"
 
 [package.metadata.release]
 dev-version-ext             = "pre"
