@@ -16,7 +16,7 @@ travis-ci = { repository = "dalance/softether_exporter" }
 [dependencies]
 anyhow       = "1"
 csv          = "1"
-hyper        = { version = "0.9", default-features = false }
+hyper        = { version = "0.10", default-features = false }
 lazy_static  = "1"
 prometheus   = "0.9"
 serde        = "1"
