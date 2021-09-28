@@ -18,7 +18,7 @@ anyhow       = "1"
 csv          = "1"
 hyper        = { version = "0.10", default-features = false }
 lazy_static  = "1"
-prometheus   = "0.12"
+prometheus   = "0.13"
 serde        = "1"
 serde_derive = "1"
 structopt    = "0.3"
