@@ -7,7 +7,7 @@ use hyper::uri::RequestUri;
 use lazy_static::lazy_static;
 use prometheus;
 use prometheus::{register_gauge_vec, Encoder, GaugeVec, TextEncoder};
-use serde_derive::Deserialize;
+use serde::Deserialize;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Read;
