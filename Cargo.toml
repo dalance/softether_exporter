@@ -2,8 +2,7 @@
 name = "softether_exporter"
 version = "0.2.1-pre"
 authors = ["dalance <dalance@gmail.com>"]
-#repository = "https://github.com/dalance/softether_exporter"
-repository = "https://github.com/robisetiapermadi/softether_exporter"
+repository = "https://github.com/dalance/softether_exporter"
 license = "MIT"
 readme = "README.md"
 description = "Prometheus expoter for SoftEther VPN server"
