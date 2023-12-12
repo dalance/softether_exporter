@@ -163,6 +163,8 @@ impl Exporter {
         let server = config.server.unwrap_or(String::from("localhost"));
         let hubs = config.hubs;
 
+        let adminpassword = config.adminpassword.unwrap_or(String::from(""));
+
         let addr = if listen_address.starts_with(":") {
             format!("0.0.0.0{}", listen_address)
         } else {
@@ -171,13 +173,15 @@ impl Exporter {
 
         println!("Server started: {}", addr);
 
+        println!("Admin password is: {}", addr);
+
         Server::http(addr)?.handle(move |req: Request, mut res: Response| {
             if req.uri == RequestUri::AbsolutePath("/metrics".to_string()) {
                 for hub in hubs.clone() {
                     let name = hub.name.unwrap_or(String::from(""));
-                    let password = hub.password.unwrap_or(String::from(""));
+                    //let password = hub.password.unwrap_or(String::from(""));
                     let status =
-                        match SoftEtherReader::hub_status(&vpncmd, &server, &name, &password) {
+                        match SoftEtherReader::hub_status(&vpncmd, &server, &name, &adminpassword) {
                             Ok(x) => x,
                             Err(x) => {
                                 UP.with_label_values(&[&name]).set(0.0);
@@ -187,7 +191,7 @@ impl Exporter {
                         };
 
                     let sessions =
-                        match SoftEtherReader::hub_sessions(&vpncmd, &server, &name, &password) {
+                        match SoftEtherReader::hub_sessions(&vpncmd, &server, &name, &adminpassword) {
                             Ok(x) => x,
                             Err(x) => {
                                 UP.with_label_values(&[&name]).set(0.0);
