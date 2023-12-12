@@ -53,7 +53,7 @@ impl SoftEtherReader {
         if !output.status.success() {
             let msg = String::from_utf8_lossy(output.stdout.as_slice());
             return Err(Box::new(SoftEtherError {
-                msg: String::from(format!("vpncmd failed ( {} )", msg)),
+                msg: String::from(format!("robi vpncmd failed ( {} )", msg)),
             }));
         }
 
@@ -89,7 +89,7 @@ impl SoftEtherReader {
         if !output.status.success() {
             let msg = String::from_utf8_lossy(output.stdout.as_slice());
             return Err(Box::new(SoftEtherError {
-                msg: String::from(format!("vpncmd failed ( {} )", msg)),
+                msg: String::from(format!("robi vpncmd failed ( {} )", msg)),
             }));
         }
 
