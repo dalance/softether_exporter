@@ -174,8 +174,6 @@ impl Exporter {
 
         println!("Server started: {}", addr);
 
-        println!("Admin password is: {}", addr);
-
         Server::http(addr)?.handle(move |req: Request, mut res: Response| {
             if req.uri == RequestUri::AbsolutePath("/metrics".to_string()) {
                 for hub in hubs.clone() {
