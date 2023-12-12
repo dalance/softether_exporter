@@ -135,13 +135,14 @@ static RUST_VERSION: Option<&'static str> = option_env!("RUST_VERSION");
 pub struct Config {
     vpncmd: Option<String>,
     server: Option<String>,
+    adminpassword: Option<String>,
     hubs: Vec<Hub>,
 }
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct Hub {
     name: Option<String>,
-    password: Option<String>,
+    //password: Option<String>,
 }
 
 impl Config {
