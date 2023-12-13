@@ -13,6 +13,8 @@ use std::fs::File;
 use std::io::Read;
 use std::path::Path;
 use toml;
+use std::thread;
+
 
 lazy_static! {
     static ref UP: GaugeVec =
@@ -135,6 +137,7 @@ static RUST_VERSION: Option<&'static str> = option_env!("RUST_VERSION");
 pub struct Config {
     vpncmd: Option<String>,
     server: Option<String>,
+    sleep: Option<String>,
     adminpassword: Option<String>,
     hubs: Vec<Hub>,
 }
@@ -162,6 +165,7 @@ impl Exporter {
         let encoder = TextEncoder::new();
         let vpncmd = config.vpncmd.unwrap_or(String::from("vpncmd"));
         let server = config.server.unwrap_or(String::from("localhost"));
+        let sleep: String = config.sleep.unwrap_or(String::from("500"));
         let hubs = config.hubs;
 
         let adminpassword = config.adminpassword.unwrap_or(String::from(""));
@@ -179,25 +183,33 @@ impl Exporter {
                 for hub in hubs.clone() {
                     let name = hub.name.unwrap_or(String::from(""));
                     //let password = hub.password.unwrap_or(String::from(""));
-                    let status =
-                        match SoftEtherReader::hub_status(&vpncmd, &server, &name, &adminpassword) {
-                            Ok(x) => x,
-                            Err(x) => {
-                                UP.with_label_values(&[&name]).set(0.0);
-                                println!("Hub status read failed: {}", x);
-                                continue;
-                            }
-                        };
+                    let status = match SoftEtherReader::hub_status(
+                        &vpncmd,
+                        &server,
+                        &name,
+                        &adminpassword,
+                    ) {
+                        Ok(x) => x,
+                        Err(x) => {
+                            UP.with_label_values(&[&name]).set(0.0);
+                            println!("Hub status read failed: {}", x);
+                            continue;
+                        }
+                    };
 
-                    let sessions =
-                        match SoftEtherReader::hub_sessions(&vpncmd, &server, &name, &adminpassword) {
-                            Ok(x) => x,
-                            Err(x) => {
-                                UP.with_label_values(&[&name]).set(0.0);
-                                println!("Hub sessions read failed: {}", x);
-                                continue;
-                            }
-                        };
+                    let sessions = match SoftEtherReader::hub_sessions(
+                        &vpncmd,
+                        &server,
+                        &name,
+                        &adminpassword,
+                    ) {
+                        Ok(x) => x,
+                        Err(x) => {
+                            UP.with_label_values(&[&name]).set(0.0);
+                            println!("Hub sessions read failed: {}", x);
+                            continue;
+                        }
+                    };
 
                     UP.with_label_values(&[&status.name]).set(1.0);
                     ONLINE
@@ -274,6 +286,12 @@ impl Exporter {
                             .with_label_values(&[&status.name, user])
                             .set(*packets);
                     }
+
+                    
+
+                    thread::sleep_ms(sleep.parse::<u32>().unwrap());
+
+
                 }
 
                 let git_revision = GIT_REVISION.unwrap_or("");
