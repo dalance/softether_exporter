@@ -90,12 +90,11 @@ The format of `<config>` is below.
 ```
 vpncmd = "/usr/local/bin/vpncmd" # path to vpncmd binary
 server = "localhost:8888"        # address:port of SoftEther VPN server
+adminpassword = "blablabla"
 
 [[hubs]]
 name     = "HUB1" # HUB name
-password = "xxx"  # HUB password
 
 [[hubs]]
 name     = "HUB2"
-password = "yyy"
 ```
